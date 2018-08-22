@@ -35,12 +35,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			
 			<!-- 去除内嵌tomcat -->
-      <!-- <exclusions>
+      <exclusions>
         <exclusion>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
         </exclusion>
-      </exclusions> -->
+      </exclusions>
       
 		</dependency>
 
@@ -51,24 +51,24 @@
 		</dependency>
 		
 		<!--移除内嵌的tomcat容器后需要添加servlet的依赖-->
-    <!-- <dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
       <scope>provided</scope>
-    </dependency> -->
+    </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<!-- <plugin>
+			</plugin> -->
+			<plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.0.0</version>
-      </plugin> -->
+      </plugin>
 		</plugins>
 	</build>
 
