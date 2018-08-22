@@ -24,7 +24,8 @@ public class SearchController {
   
   @GetMapping(value="/description")
   public Map<String,Object> searchForPaginat(@RequestParam String keyword, @RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-    List<String> results = searchService.query(keyword, pageNum, pageSize);
+    //List<String> results = searchService.query(keyword, pageNum, pageSize);
+    Map<String, List<String>> results = searchService.query(keyword, pageNum, pageSize);
     Map<String, Object> map = new HashMap<>();
     map.put("msg", "success");
     map.put("result", results);

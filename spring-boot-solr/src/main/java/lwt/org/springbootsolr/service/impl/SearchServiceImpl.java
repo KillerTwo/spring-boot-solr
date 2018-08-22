@@ -2,6 +2,7 @@ package lwt.org.springbootsolr.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +23,12 @@ public class SearchServiceImpl implements SearchService {
   private SolrClient solrClient;
   
   @Override
-  public List<String> query(String keyword, int pageNum, int pageSize) {
-    List<String> ResultContent = new ArrayList<>();
+  public Map<String, List<String>> query(String keyword, int pageNum, int pageSize) {
+    List<Map<String, String>> resultList = new ArrayList<>();
+    Map<String, String> keyMapedContent = new HashMap<>();
+    Map<String, List<String>> resultMap = new HashMap<>();
+    List<String> resultContent = new ArrayList<>();
+    List<String> keyWordContent = new ArrayList<>();
     SolrQuery query = new SolrQuery();
     query.setQuery("my_content:"+keyword);
     
@@ -52,22 +57,30 @@ public class SearchServiceImpl implements SearchService {
       
       SolrDocumentList solrDocumentList = response.getResults();
       for (SolrDocument solrDocument : solrDocumentList) {
-        /*String content = (String) solrDocument.get("my_content");
+        String content = (String) solrDocument.get("my_content");
+        /*
         System.out.println("content:"+ content);
-        ResultContent.add(content);*/
+        */
+        resultContent.add(content);                 // 包含全部的内容
         Map<String, List<String>> map = highlightMap.get(solrDocument.get("id"));
         List<String> list = map.get("my_content");
-        System.out.println(list);
-        ResultContent.add(list.get(0));
+        //System.out.println(list);
+        keyWordContent.add(list.get(0));            // 截取关键词前后的一段
+        //keyMapedContent.put(list.get(0), content);
       }
-      return ResultContent;
+      System.err.println("关键字：     " +keyWordContent.get(0));
+      System.err.println("***********************************************");
+      System.err.println("内容： "+resultContent.get(0));
+      resultMap.put("content", resultContent);
+      resultMap.put("keyWordContent", keyWordContent);
+      return resultMap;
     } catch (SolrServerException e) {
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
     
-    return ResultContent;
+    return resultMap;
   }
 
 }
