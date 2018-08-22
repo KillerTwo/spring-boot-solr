@@ -1,0 +1,4 @@
+spring:
+   data:
+      solr:
+         host: http://10.10.10.231:8081/solr/core1
