@@ -5,19 +5,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-@SpringBootApplication
+/*@SpringBootApplication
 public class SpringBootSolrApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSolrApplication.class, args);
 	}
-}
+}*/
 /**
  * 
  *      移除内嵌的tomcat后需要继承SpringBootServletInitializer类并实现configure方法
  * @author Administrator
  *
  */
-/*@SpringBootApplication
+@SpringBootApplication
 public class SpringBootSolrApplication extends SpringBootServletInitializer{
   public static void main(String[] args) {
     SpringApplication.run(SpringBootSolrApplication.class, args);
@@ -28,4 +28,4 @@ public class SpringBootSolrApplication extends SpringBootServletInitializer{
     return builder.sources(this.getClass());
   }
   
-}*/
+}
