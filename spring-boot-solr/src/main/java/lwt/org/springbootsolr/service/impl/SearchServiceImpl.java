@@ -56,6 +56,8 @@ public class SearchServiceImpl implements SearchService {
       Map<String, Map<String, List<String>>> highlightMap = response.getHighlighting();
       
       SolrDocumentList solrDocumentList = response.getResults();
+      List<String> count = new ArrayList<>();
+      count.add(solrDocumentList.getNumFound()+"");
       for (SolrDocument solrDocument : solrDocumentList) {
         String content = (String) solrDocument.get("my_content");
         /*
@@ -68,9 +70,11 @@ public class SearchServiceImpl implements SearchService {
         keyWordContent.add(list.get(0));            // 截取关键词前后的一段
         //keyMapedContent.put(list.get(0), content);
       }
+      System.err.println("符合条件的数量： 》》 "+count);
       System.err.println("关键字：     " +keyWordContent.get(0));
       System.err.println("***********************************************");
       System.err.println("内容： "+resultContent.get(0));
+      resultMap.put("count", count);
       resultMap.put("content", resultContent);
       resultMap.put("keyWordContent", keyWordContent);
       return resultMap;
